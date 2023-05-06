@@ -1,9 +1,9 @@
-# {Company} Node Library
+# Axle Node Library
 
-[![npm shield](https://img.shields.io/npm/v/@fern-api/{company})](https://www.npmjs.com/package/@fern-api/{company})
+[![npm shield](https://img.shields.io/npm/v/@fern-api/axle)](https://www.npmjs.com/package/@fern-api/axle)
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://github.com/fern-api/fern)
 
-The {Company} Node.js library provides access to the {Company} API from JavaScript/TypeScript.
+The Axle Node.js library provides access to the Axle API from JavaScript/TypeScript.
 
 ## Documentation
 
