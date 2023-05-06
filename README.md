@@ -7,16 +7,30 @@ The Axle Node.js library provides access to the Axle API from JavaScript/TypeScr
 
 ## Documentation
 
-API reference documentation is available [here](docs_url).
+API reference documentation is available [here](https://docs.axle.insure/welcome).
 
 ## Usage
 
-[![Try it out](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](TODO)
+[![Try it out](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/typescript-example-using-sdk-built-with-fern-u9hbuh?file=app.ts)
 
 ```typescript
-import { TODO } from "TODO";
+import { AxleApiClient } from '@fern-api/axle';
 
-const TODO
+void main();
+
+async function main() {
+  const client = new AxleApiClient({
+    'x-client-id': "cli_mZj6YGXhQyQnccN97aXbq",
+    'x-client-secret': "RZM-5BErZuChKqycbCS1O'
+  });
+
+  const response = await client.ignition.startIgnition({
+    redirectUri: 'https://example.com/insurance/success',
+    webhookUri: 'https://example.com/webhook',
+  });
+
+  console.log('Received response from Axle!', response);
+}
 ```
 
 ## Beta status
