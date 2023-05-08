@@ -4,4 +4,5 @@
 
 export interface GetPolicyRequest {
     expand?: boolean;
+    accessToken: string;
 }

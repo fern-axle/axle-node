@@ -4,4 +4,5 @@
 
 export interface GetAccountRequest {
     expand?: boolean;
+    accessToken: string;
 }
