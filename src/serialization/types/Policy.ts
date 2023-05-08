@@ -3,7 +3,7 @@
  */
 
 import * as serializers from "..";
-import { Axle } from "@fern-api/axle";
+import * as Axle from "../../api";
 import * as core from "../../core";
 
 export const Policy: core.serialization.ObjectSchema<serializers.Policy.Raw, Axle.Policy> = core.serialization.object({

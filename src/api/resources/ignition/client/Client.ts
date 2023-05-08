@@ -3,7 +3,7 @@
  */
 
 import * as core from "../../../../core";
-import { Axle } from "@fern-api/axle";
+import * as Axle from "../../..";
 import urlJoin from "url-join";
 import * as serializers from "../../../../serialization";
 import * as errors from "../../../../errors";
@@ -11,31 +11,34 @@ import * as errors from "../../../../errors";
 export declare namespace Ignition {
     interface Options {
         environment: string;
-        apiKey?: core.Supplier<string>;
-        clientId: string;
-        clientSecret: string;
+        apiKey?: core.Supplier<string | undefined>;
+        clientId: core.Supplier<string>;
+        clientSecret: core.Supplier<string>;
     }
 }
 
 export class Ignition {
-    constructor(private readonly options: Ignition.Options) {}
+    constructor(protected readonly options: Ignition.Options) {}
 
     public async startIgnition(request: Axle.StartIgnitionRequest = {}): Promise<Axle.StartIgnitionResponse> {
         const _response = await core.fetcher({
             url: urlJoin(this.options.environment, "ignition"),
             method: "POST",
             headers: {
-                "x-client-id": this.options.clientId,
-                "x-client-secret": this.options.clientSecret,
+                "x-client-id": await core.Supplier.get(this.options.clientId),
+                "x-client-secret": await core.Supplier.get(this.options.clientSecret),
                 "x-access-token": await core.Supplier.get(this.options.apiKey),
             },
-            body: await serializers.StartIgnitionRequest.jsonOrThrow(request),
+            contentType: "application/json",
+            body: await serializers.StartIgnitionRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: 60000,
         });
         if (_response.ok) {
-            return await serializers.StartIgnitionResponse.parseOrThrow(
-                _response.body as serializers.StartIgnitionResponse.Raw,
-                { allowUnknownKeys: true }
-            );
+            return await serializers.StartIgnitionResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+            });
         }
 
         if (_response.error.reason === "status-code") {

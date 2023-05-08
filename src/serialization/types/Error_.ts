@@ -3,15 +3,15 @@
  */
 
 import * as serializers from "..";
-import { Axle } from "@fern-api/axle";
+import * as Axle from "../../api";
 import * as core from "../../core";
 
-export const Error: core.serialization.ObjectSchema<serializers.Error.Raw, Axle.Error> = core.serialization.object({
+export const Error_: core.serialization.ObjectSchema<serializers.Error_.Raw, Axle.Error_> = core.serialization.object({
     success: core.serialization.lazy(async () => (await import("..")).Success).optional(),
     message: core.serialization.string().optional(),
 });
 
-export declare namespace Error {
+export declare namespace Error_ {
     interface Raw {
         success?: serializers.Success.Raw | null;
         message?: string | null;

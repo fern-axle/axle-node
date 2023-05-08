@@ -3,7 +3,8 @@
  */
 
 import * as core from "../../../../core";
-import { Axle } from "@fern-api/axle";
+import * as Axle from "../../..";
+import URLSearchParams from "@ungap/url-search-params";
 import urlJoin from "url-join";
 import * as serializers from "../../../../serialization";
 import * as errors from "../../../../errors";
@@ -11,14 +12,14 @@ import * as errors from "../../../../errors";
 export declare namespace Accounts {
     interface Options {
         environment: string;
-        apiKey?: core.Supplier<string>;
-        clientId: string;
-        clientSecret: string;
+        apiKey?: core.Supplier<string | undefined>;
+        clientId: core.Supplier<string>;
+        clientSecret: core.Supplier<string>;
     }
 }
 
 export class Accounts {
-    constructor(private readonly options: Accounts.Options) {}
+    constructor(protected readonly options: Accounts.Options) {}
 
     public async getAccount(id: string, request: Axle.GetAccountRequest = {}): Promise<Axle.GetAccountResponse> {
         const { expand } = request;
@@ -31,17 +32,20 @@ export class Accounts {
             url: urlJoin(this.options.environment, `accounts/${id}`),
             method: "GET",
             headers: {
-                "x-client-id": this.options.clientId,
-                "x-client-secret": this.options.clientSecret,
+                "x-client-id": await core.Supplier.get(this.options.clientId),
+                "x-client-secret": await core.Supplier.get(this.options.clientSecret),
                 "x-access-token": await core.Supplier.get(this.options.apiKey),
             },
+            contentType: "application/json",
             queryParameters: _queryParams,
+            timeoutMs: 60000,
         });
         if (_response.ok) {
-            return await serializers.GetAccountResponse.parseOrThrow(
-                _response.body as serializers.GetAccountResponse.Raw,
-                { allowUnknownKeys: true }
-            );
+            return await serializers.GetAccountResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+            });
         }
 
         if (_response.error.reason === "status-code") {

@@ -12,40 +12,40 @@ import { Carriers } from "./api/resources/carriers/client/Client";
 export declare namespace AxleClient {
     interface Options {
         environment: string;
-        apiKey?: core.Supplier<string>;
-        clientId: string;
-        clientSecret: string;
+        apiKey?: core.Supplier<string | undefined>;
+        clientId: core.Supplier<string>;
+        clientSecret: core.Supplier<string>;
     }
 }
 
 export class AxleClient {
-    constructor(private readonly options: AxleClient.Options) {}
+    constructor(protected readonly options: AxleClient.Options) {}
 
-    private _ignition: Ignition | undefined;
+    protected _ignition: Ignition | undefined;
 
     public get ignition(): Ignition {
         return (this._ignition ??= new Ignition(this.options));
     }
 
-    private _tokens: Tokens | undefined;
+    protected _tokens: Tokens | undefined;
 
     public get tokens(): Tokens {
         return (this._tokens ??= new Tokens(this.options));
     }
 
-    private _accounts: Accounts | undefined;
+    protected _accounts: Accounts | undefined;
 
     public get accounts(): Accounts {
         return (this._accounts ??= new Accounts(this.options));
     }
 
-    private _policies: Policies | undefined;
+    protected _policies: Policies | undefined;
 
     public get policies(): Policies {
         return (this._policies ??= new Policies(this.options));
     }
 
-    private _carriers: Carriers | undefined;
+    protected _carriers: Carriers | undefined;
 
     public get carriers(): Carriers {
         return (this._carriers ??= new Carriers(this.options));

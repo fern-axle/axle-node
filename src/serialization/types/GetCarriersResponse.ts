@@ -3,7 +3,7 @@
  */
 
 import * as serializers from "..";
-import { Axle } from "@fern-api/axle";
+import * as Axle from "../../api";
 import * as core from "../../core";
 
 export const GetCarriersResponse: core.serialization.ObjectSchema<

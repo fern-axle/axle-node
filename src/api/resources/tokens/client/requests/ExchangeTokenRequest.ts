@@ -3,5 +3,6 @@
  */
 
 export interface ExchangeTokenRequest {
+    /** The authorization code obtained after a user successfully links their account via Ignition. Returned as a query parameter at the redirectUri. */
     authCode: string;
 }

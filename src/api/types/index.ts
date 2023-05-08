@@ -21,4 +21,4 @@ export * from "./ThirdParty";
 export * from "./ThirdPartyType";
 export * from "./User";
 export * from "./Success";
-export * from "./Error";
+export * from "./Error_";
