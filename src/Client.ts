@@ -13,6 +13,8 @@ export declare namespace AxleApiClient {
     interface Options {
         environment: string;
         apiKey?: core.Supplier<string>;
+        clientId: string;
+        clientSecret: string;
     }
 }
 

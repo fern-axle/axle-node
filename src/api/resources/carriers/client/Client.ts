@@ -12,6 +12,8 @@ export declare namespace Carriers {
     interface Options {
         environment: string;
         apiKey?: core.Supplier<string>;
+        clientId: string;
+        clientSecret: string;
     }
 }
 
@@ -23,7 +25,9 @@ export class Carriers {
             url: urlJoin(this.options.environment, `carriers/${id}`),
             method: "GET",
             headers: {
-                X_API_KEY: await core.Supplier.get(this.options.apiKey),
+                "x-client-id": this.options.clientId,
+                "x-client-secret": this.options.clientSecret,
+                "x-access-token": await core.Supplier.get(this.options.apiKey),
             },
         });
         if (_response.ok) {
@@ -60,7 +64,9 @@ export class Carriers {
             url: urlJoin(this.options.environment, "carriers"),
             method: "GET",
             headers: {
-                X_API_KEY: await core.Supplier.get(this.options.apiKey),
+                "x-client-id": this.options.clientId,
+                "x-client-secret": this.options.clientSecret,
+                "x-access-token": await core.Supplier.get(this.options.apiKey),
             },
         });
         if (_response.ok) {

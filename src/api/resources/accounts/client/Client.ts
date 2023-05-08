@@ -12,6 +12,8 @@ export declare namespace Accounts {
     interface Options {
         environment: string;
         apiKey?: core.Supplier<string>;
+        clientId: string;
+        clientSecret: string;
     }
 }
 
@@ -29,7 +31,9 @@ export class Accounts {
             url: urlJoin(this.options.environment, `accounts/${id}`),
             method: "GET",
             headers: {
-                X_API_KEY: await core.Supplier.get(this.options.apiKey),
+                "x-client-id": this.options.clientId,
+                "x-client-secret": this.options.clientSecret,
+                "x-access-token": await core.Supplier.get(this.options.apiKey),
             },
             queryParameters: _queryParams,
         });

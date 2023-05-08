@@ -12,6 +12,8 @@ export declare namespace Ignition {
     interface Options {
         environment: string;
         apiKey?: core.Supplier<string>;
+        clientId: string;
+        clientSecret: string;
     }
 }
 
@@ -23,7 +25,9 @@ export class Ignition {
             url: urlJoin(this.options.environment, "ignition"),
             method: "POST",
             headers: {
-                X_API_KEY: await core.Supplier.get(this.options.apiKey),
+                "x-client-id": this.options.clientId,
+                "x-client-secret": this.options.clientSecret,
+                "x-access-token": await core.Supplier.get(this.options.apiKey),
             },
             body: await serializers.StartIgnitionRequest.jsonOrThrow(request),
         });
