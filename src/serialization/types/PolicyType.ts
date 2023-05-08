@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../core";
 
-export const PolicyType: core.serialization.Schema<serializers.PolicyType.Raw, AxleApi.PolicyType> =
+export const PolicyType: core.serialization.Schema<serializers.PolicyType.Raw, Axle.PolicyType> =
     core.serialization.enum_(["auto", "motorcycle"]);
 
 export declare namespace PolicyType {

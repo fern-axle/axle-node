@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../core";
 
-export const User: core.serialization.ObjectSchema<serializers.User.Raw, AxleApi.User> = core.serialization.object({
+export const User: core.serialization.ObjectSchema<serializers.User.Raw, Axle.User> = core.serialization.object({
     id: core.serialization.string(),
     firstName: core.serialization.string().optional(),
     lastName: core.serialization.string().optional(),

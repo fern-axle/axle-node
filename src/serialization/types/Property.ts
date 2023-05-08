@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../core";
 
-export const Property: core.serialization.ObjectSchema<serializers.Property.Raw, AxleApi.Property> =
+export const Property: core.serialization.ObjectSchema<serializers.Property.Raw, Axle.Property> =
     core.serialization.object({
         id: core.serialization.string(),
         type: core.serialization.lazy(async () => (await import("..")).PropertyType),

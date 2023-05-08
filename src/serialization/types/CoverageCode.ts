@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../core";
 
-export const CoverageCode: core.serialization.Schema<serializers.CoverageCode.Raw, AxleApi.CoverageCode> =
+export const CoverageCode: core.serialization.Schema<serializers.CoverageCode.Raw, Axle.CoverageCode> =
     core.serialization.enum_(["BI", "PD", "UMBI", "UMPD", "UIMBI", "UIMPD", "COLL", "COMP"]);
 
 export declare namespace CoverageCode {

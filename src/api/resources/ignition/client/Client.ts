@@ -3,7 +3,7 @@
  */
 
 import * as core from "../../../../core";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import urlJoin from "url-join";
 import * as serializers from "../../../../serialization";
 import * as errors from "../../../../errors";
@@ -20,7 +20,7 @@ export declare namespace Ignition {
 export class Ignition {
     constructor(private readonly options: Ignition.Options) {}
 
-    public async startIgnition(request: AxleApi.StartIgnitionRequest = {}): Promise<AxleApi.StartIgnitionResponse> {
+    public async startIgnition(request: Axle.StartIgnitionRequest = {}): Promise<Axle.StartIgnitionResponse> {
         const _response = await core.fetcher({
             url: urlJoin(this.options.environment, "ignition"),
             method: "POST",
@@ -39,7 +39,7 @@ export class Ignition {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.AxleApiError({
+            throw new errors.AxleError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
             });
@@ -47,14 +47,14 @@ export class Ignition {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.AxleApiError({
+                throw new errors.AxleError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.AxleApiTimeoutError();
+                throw new errors.AxleTimeoutError();
             case "unknown":
-                throw new errors.AxleApiError({
+                throw new errors.AxleError({
                     message: _response.error.errorMessage,
                 });
         }

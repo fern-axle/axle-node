@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../core";
 
-export const Vehicle: core.serialization.ObjectSchema<serializers.Vehicle.Raw, AxleApi.Vehicle> =
+export const Vehicle: core.serialization.ObjectSchema<serializers.Vehicle.Raw, Axle.Vehicle> =
     core.serialization.object({
         bodyStyle: core.serialization.string().optional(),
         vin: core.serialization.string(),

@@ -3,12 +3,12 @@
  */
 
 import * as serializers from "../../../..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../../../../core";
 
 export const ExchangeTokenRequest: core.serialization.Schema<
     serializers.ExchangeTokenRequest.Raw,
-    AxleApi.ExchangeTokenRequest
+    Axle.ExchangeTokenRequest
 > = core.serialization.object({
     authCode: core.serialization.string(),
 });

@@ -1,2 +1,2 @@
-export { AxleApiError } from "./AxleApiError";
-export { AxleApiTimeoutError } from "./AxleApiTimeoutError";
+export { AxleError } from "./AxleError";
+export { AxleTimeoutError } from "./AxleTimeoutError";

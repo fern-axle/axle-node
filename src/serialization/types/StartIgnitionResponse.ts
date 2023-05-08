@@ -3,12 +3,12 @@
  */
 
 import * as serializers from "..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../core";
 
 export const StartIgnitionResponse: core.serialization.ObjectSchema<
     serializers.StartIgnitionResponse.Raw,
-    AxleApi.StartIgnitionResponse
+    Axle.StartIgnitionResponse
 > = core.serialization.object({
     success: core.serialization.lazy(async () => (await import("..")).Success),
     data: core.serialization.lazyObject(async () => (await import("..")).StartIgnitionResponseData),

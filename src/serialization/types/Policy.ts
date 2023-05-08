@@ -3,30 +3,27 @@
  */
 
 import * as serializers from "..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../core";
 
-export const Policy: core.serialization.ObjectSchema<serializers.Policy.Raw, AxleApi.Policy> =
-    core.serialization.object({
-        id: core.serialization.string(),
-        account: core.serialization.string(),
-        type: core.serialization.lazy(async () => (await import("..")).PolicyType),
-        carrier: core.serialization.string(),
-        policyNumber: core.serialization.string(),
-        isActive: core.serialization.boolean(),
-        effectiveDate: core.serialization.string(),
-        expirationDate: core.serialization.string(),
-        address: core.serialization.lazyObject(async () => (await import("..")).Address),
-        coverages: core.serialization.list(core.serialization.lazyObject(async () => (await import("..")).Coverage)),
-        properties: core.serialization.list(core.serialization.lazyObject(async () => (await import("..")).Property)),
-        insureds: core.serialization.list(core.serialization.lazyObject(async () => (await import("..")).Insured)),
-        thirdParties: core.serialization.list(
-            core.serialization.lazyObject(async () => (await import("..")).ThirdParty)
-        ),
-        createdAt: core.serialization.string(),
-        modifiedAt: core.serialization.string(),
-        refreshedAt: core.serialization.string(),
-    });
+export const Policy: core.serialization.ObjectSchema<serializers.Policy.Raw, Axle.Policy> = core.serialization.object({
+    id: core.serialization.string(),
+    account: core.serialization.string(),
+    type: core.serialization.lazy(async () => (await import("..")).PolicyType),
+    carrier: core.serialization.string(),
+    policyNumber: core.serialization.string(),
+    isActive: core.serialization.boolean(),
+    effectiveDate: core.serialization.string(),
+    expirationDate: core.serialization.string(),
+    address: core.serialization.lazyObject(async () => (await import("..")).Address),
+    coverages: core.serialization.list(core.serialization.lazyObject(async () => (await import("..")).Coverage)),
+    properties: core.serialization.list(core.serialization.lazyObject(async () => (await import("..")).Property)),
+    insureds: core.serialization.list(core.serialization.lazyObject(async () => (await import("..")).Insured)),
+    thirdParties: core.serialization.list(core.serialization.lazyObject(async () => (await import("..")).ThirdParty)),
+    createdAt: core.serialization.string(),
+    modifiedAt: core.serialization.string(),
+    refreshedAt: core.serialization.string(),
+});
 
 export declare namespace Policy {
     interface Raw {

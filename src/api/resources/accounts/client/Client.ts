@@ -3,7 +3,7 @@
  */
 
 import * as core from "../../../../core";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import urlJoin from "url-join";
 import * as serializers from "../../../../serialization";
 import * as errors from "../../../../errors";
@@ -20,7 +20,7 @@ export declare namespace Accounts {
 export class Accounts {
     constructor(private readonly options: Accounts.Options) {}
 
-    public async getAccount(id: string, request: AxleApi.GetAccountRequest = {}): Promise<AxleApi.GetAccountResponse> {
+    public async getAccount(id: string, request: Axle.GetAccountRequest = {}): Promise<Axle.GetAccountResponse> {
         const { expand } = request;
         const _queryParams = new URLSearchParams();
         if (expand != null) {
@@ -45,7 +45,7 @@ export class Accounts {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.AxleApiError({
+            throw new errors.AxleError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
             });
@@ -53,14 +53,14 @@ export class Accounts {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.AxleApiError({
+                throw new errors.AxleError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.AxleApiTimeoutError();
+                throw new errors.AxleTimeoutError();
             case "unknown":
-                throw new errors.AxleApiError({
+                throw new errors.AxleError({
                     message: _response.error.errorMessage,
                 });
         }

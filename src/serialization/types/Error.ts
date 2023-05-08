@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../core";
 
-export const Error: core.serialization.ObjectSchema<serializers.Error.Raw, AxleApi.Error> = core.serialization.object({
+export const Error: core.serialization.ObjectSchema<serializers.Error.Raw, Axle.Error> = core.serialization.object({
     success: core.serialization.lazy(async () => (await import("..")).Success).optional(),
     message: core.serialization.string().optional(),
 });

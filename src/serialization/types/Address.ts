@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../core";
 
-export const Address: core.serialization.ObjectSchema<serializers.Address.Raw, AxleApi.Address> =
+export const Address: core.serialization.ObjectSchema<serializers.Address.Raw, Axle.Address> =
     core.serialization.object({
         addressLine1: core.serialization.string().optional(),
         country: core.serialization.string().optional(),

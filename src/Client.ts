@@ -9,7 +9,7 @@ import { Accounts } from "./api/resources/accounts/client/Client";
 import { Policies } from "./api/resources/policies/client/Client";
 import { Carriers } from "./api/resources/carriers/client/Client";
 
-export declare namespace AxleApiClient {
+export declare namespace AxleClient {
     interface Options {
         environment: string;
         apiKey?: core.Supplier<string>;
@@ -18,8 +18,8 @@ export declare namespace AxleApiClient {
     }
 }
 
-export class AxleApiClient {
-    constructor(private readonly options: AxleApiClient.Options) {}
+export class AxleClient {
+    constructor(private readonly options: AxleClient.Options) {}
 
     private _ignition: Ignition | undefined;
 

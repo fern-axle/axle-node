@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../core";
 
-export const Coverage: core.serialization.ObjectSchema<serializers.Coverage.Raw, AxleApi.Coverage> =
+export const Coverage: core.serialization.ObjectSchema<serializers.Coverage.Raw, Axle.Coverage> =
     core.serialization.object({
         property: core.serialization.string().optional(),
         code: core.serialization.lazy(async () => (await import("..")).CoverageCode),

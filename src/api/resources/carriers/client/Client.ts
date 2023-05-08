@@ -3,7 +3,7 @@
  */
 
 import * as core from "../../../../core";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import urlJoin from "url-join";
 import * as serializers from "../../../../serialization";
 import * as errors from "../../../../errors";
@@ -20,7 +20,7 @@ export declare namespace Carriers {
 export class Carriers {
     constructor(private readonly options: Carriers.Options) {}
 
-    public async getCarrier(id: string): Promise<AxleApi.GetCarrierResponse> {
+    public async getCarrier(id: string): Promise<Axle.GetCarrierResponse> {
         const _response = await core.fetcher({
             url: urlJoin(this.options.environment, `carriers/${id}`),
             method: "GET",
@@ -38,7 +38,7 @@ export class Carriers {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.AxleApiError({
+            throw new errors.AxleError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
             });
@@ -46,20 +46,20 @@ export class Carriers {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.AxleApiError({
+                throw new errors.AxleError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.AxleApiTimeoutError();
+                throw new errors.AxleTimeoutError();
             case "unknown":
-                throw new errors.AxleApiError({
+                throw new errors.AxleError({
                     message: _response.error.errorMessage,
                 });
         }
     }
 
-    public async getCarriers(): Promise<AxleApi.GetCarriersResponse> {
+    public async getCarriers(): Promise<Axle.GetCarriersResponse> {
         const _response = await core.fetcher({
             url: urlJoin(this.options.environment, "carriers"),
             method: "GET",
@@ -77,7 +77,7 @@ export class Carriers {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.AxleApiError({
+            throw new errors.AxleError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
             });
@@ -85,14 +85,14 @@ export class Carriers {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.AxleApiError({
+                throw new errors.AxleError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.AxleApiTimeoutError();
+                throw new errors.AxleTimeoutError();
             case "unknown":
-                throw new errors.AxleApiError({
+                throw new errors.AxleError({
                     message: _response.error.errorMessage,
                 });
         }

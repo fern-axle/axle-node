@@ -3,7 +3,7 @@
  */
 
 import * as core from "../../../../core";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import urlJoin from "url-join";
 import * as serializers from "../../../../serialization";
 import * as errors from "../../../../errors";
@@ -20,7 +20,7 @@ export declare namespace Policies {
 export class Policies {
     constructor(private readonly options: Policies.Options) {}
 
-    public async getPolicy(id: string, request: AxleApi.GetPolicyRequest = {}): Promise<AxleApi.GetPolicyResponse> {
+    public async getPolicy(id: string, request: Axle.GetPolicyRequest = {}): Promise<Axle.GetPolicyResponse> {
         const { expand } = request;
         const _queryParams = new URLSearchParams();
         if (expand != null) {
@@ -45,7 +45,7 @@ export class Policies {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.AxleApiError({
+            throw new errors.AxleError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
             });
@@ -53,14 +53,14 @@ export class Policies {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.AxleApiError({
+                throw new errors.AxleError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.AxleApiTimeoutError();
+                throw new errors.AxleTimeoutError();
             case "unknown":
-                throw new errors.AxleApiError({
+                throw new errors.AxleError({
                     message: _response.error.errorMessage,
                 });
         }

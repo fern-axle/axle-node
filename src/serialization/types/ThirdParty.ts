@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../core";
 
-export const ThirdParty: core.serialization.ObjectSchema<serializers.ThirdParty.Raw, AxleApi.ThirdParty> =
+export const ThirdParty: core.serialization.ObjectSchema<serializers.ThirdParty.Raw, Axle.ThirdParty> =
     core.serialization.object({
         property: core.serialization.string().optional(),
         type: core.serialization.lazy(async () => (await import("..")).ThirdPartyType),

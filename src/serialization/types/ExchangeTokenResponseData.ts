@@ -3,12 +3,12 @@
  */
 
 import * as serializers from "..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../core";
 
 export const ExchangeTokenResponseData: core.serialization.ObjectSchema<
     serializers.ExchangeTokenResponseData.Raw,
-    AxleApi.ExchangeTokenResponseData
+    Axle.ExchangeTokenResponseData
 > = core.serialization.object({
     accessToken: core.serialization.string(),
     account: core.serialization.string(),

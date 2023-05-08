@@ -1,3 +1,3 @@
-export * as AxleApi from "./api";
-export { AxleApiClient } from "./Client";
-export { AxleApiError, AxleApiTimeoutError } from "./errors";
+export * as Axle from "./api";
+export { AxleClient } from "./Client";
+export { AxleError, AxleTimeoutError } from "./errors";

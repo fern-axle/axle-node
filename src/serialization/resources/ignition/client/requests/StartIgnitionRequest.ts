@@ -3,12 +3,12 @@
  */
 
 import * as serializers from "../../../..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../../../../core";
 
 export const StartIgnitionRequest: core.serialization.Schema<
     serializers.StartIgnitionRequest.Raw,
-    AxleApi.StartIgnitionRequest
+    Axle.StartIgnitionRequest
 > = core.serialization.object({
     redirectUri: core.serialization.string().optional(),
     webhookUri: core.serialization.string().optional(),

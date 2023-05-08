@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../core";
 
-export const PropertyType: core.serialization.Schema<serializers.PropertyType.Raw, AxleApi.PropertyType> =
+export const PropertyType: core.serialization.Schema<serializers.PropertyType.Raw, Axle.PropertyType> =
     core.serialization.enum_(["vehicle"]);
 
 export declare namespace PropertyType {

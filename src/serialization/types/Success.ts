@@ -3,11 +3,10 @@
  */
 
 import * as serializers from "..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../core";
 
-export const Success: core.serialization.Schema<serializers.Success.Raw, AxleApi.Success> =
-    core.serialization.boolean();
+export const Success: core.serialization.Schema<serializers.Success.Raw, Axle.Success> = core.serialization.boolean();
 
 export declare namespace Success {
     type Raw = boolean;

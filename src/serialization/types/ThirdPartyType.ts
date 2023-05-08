@@ -3,10 +3,10 @@
  */
 
 import * as serializers from "..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../core";
 
-export const ThirdPartyType: core.serialization.Schema<serializers.ThirdPartyType.Raw, AxleApi.ThirdPartyType> =
+export const ThirdPartyType: core.serialization.Schema<serializers.ThirdPartyType.Raw, Axle.ThirdPartyType> =
     core.serialization.enum_(["lienholder", "lessor", "interest"]);
 
 export declare namespace ThirdPartyType {

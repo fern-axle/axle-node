@@ -3,12 +3,12 @@
  */
 
 import * as serializers from "..";
-import { AxleApi } from "@fern-api/axle";
+import { Axle } from "@fern-api/axle";
 import * as core from "../../core";
 
 export const GetAccountResponse: core.serialization.ObjectSchema<
     serializers.GetAccountResponse.Raw,
-    AxleApi.GetAccountResponse
+    Axle.GetAccountResponse
 > = core.serialization.object({
     success: core.serialization.lazy(async () => (await import("..")).Success).optional(),
     data: core.serialization.lazyObject(async () => (await import("..")).Account).optional(),
