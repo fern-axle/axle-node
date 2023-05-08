@@ -9,28 +9,47 @@ The Axle Node.js library provides access to the Axle API from JavaScript/TypeScr
 
 API reference documentation is available [here](https://docs.axle.insure/welcome).
 
+
+## Installation
+
+```
+npm install --save @fern-api/axle
+# or
+yarn add @fern-api/axle
+```
+
 ## Usage
 
-[![Try it out](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/typescript-example-using-sdk-built-with-fern-u9hbuh?file=app.ts)
+[![Try it out](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/typescript-example-using-sdk-built-with-fern-7zupqs?file=app.ts)
 
 ```typescript
-import { AxleApiClient } from '@fern-api/axle';
+import { AxleClient } from '@fern-api/axle';
 
-void main();
+const axle = new AxleClient({
+  clientId: 'cli_mZj6YGXhQyQnccN97aXbq',
+  clientSecret: 'RZM-5BErZuChKqycbCS1O',
+});
 
-async function main() {
-  const client = new AxleApiClient({
-    'x-client-id': "cli_mZj6YGXhQyQnccN97aXbq",
-    'x-client-secret': "RZM-5BErZuChKqycbCS1O'
-  });
+const response = await axle.ignition.startIgnition({
+  redirectUri: 'https://example.com/insurance/success',
+  webhookUri: 'https://example.com/webhook',
+});
 
-  const response = await client.ignition.startIgnition({
-    redirectUri: 'https://example.com/insurance/success',
-    webhookUri: 'https://example.com/webhook',
-  });
+console.log('Received ignitionUri from Axle!', response.data.ignitionUri);
+```
 
-  console.log('Received response from Axle!', response);
-}
+## Sandbox Environment
+
+By default, the client will hit the production environment. If you want to use the client with the Sandbox, then you must specify it during client instantiation. 
+
+```typescript
+import { AxleEnvironment, AxleClient } from '@fern-api/axle';
+
+const axle = new AxleClient({
+  environment: AxleEnvironment.Sandbox,
+  clientId: 'cli_mZj6YGXhQyQnccN97aXbq',
+  clientSecret: 'RZM-5BErZuChKqycbCS1O',
+});
 ```
 
 ## Beta status
